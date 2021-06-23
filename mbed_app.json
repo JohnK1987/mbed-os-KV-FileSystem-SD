@@ -1,0 +1,39 @@
+{
+    "target_overrides": {
+        "*": {
+            "platform.stdio-convert-newlines": true,
+            "platform.stdio-baud-rate": 115200,
+            "platform.default-serial-baud-rate": 115200,
+            "mbed-trace.enable": true,
+            "target.printf_lib": "std",
+            "target.default_lib": "std",
+            "target.features_add": ["STORAGE"],
+            "target.components_add":["SD"],
+            "storage.storage_type": "FILESYSTEM"
+        },
+        "NUCLEO_F303RE": {
+            "sd.SPI_MOSI" : "PB_5",
+            "sd.SPI_MISO" : "PB_4",
+            "sd.SPI_CLK"  : "PB_3",
+            "sd.SPI_CS"   : "PA_10"
+        },
+        "NUCLEO_F429ZI": {
+            "sd.SPI_MOSI" : "PB_5",
+            "sd.SPI_MISO" : "PB_4",
+            "sd.SPI_CLK"  : "PB_3",
+            "sd.SPI_CS"   : "PA_4"
+        },
+        "NUCLEO_F767ZI": {
+            "sd.SPI_MOSI" : "PB_5",
+            "sd.SPI_MISO" : "PB_4",
+            "sd.SPI_CLK"  : "PB_3",
+            "sd.SPI_CS"   : "PA_4"
+        },
+        "NUCLEO_L432KC": {
+            "sd.SPI_MOSI" : "PA_7",
+            "sd.SPI_MISO" : "PA_6",
+            "sd.SPI_CLK"  : "PA_5",
+            "sd.SPI_CS"   : "PA_4"
+        }
+    }
+}

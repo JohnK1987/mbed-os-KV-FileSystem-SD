@@ -23,7 +23,7 @@ int main()
 
     fs = FileSystem::get_default_instance();
 
-    printf("Mounting...\n");    
+    printf("fs_mounting...\n");    
     if((res = fs->mount(bd))!= 0) printf("fs_mount() error: %d\n", err_code(res));
     else printf("Mounted\n");
     /*if (res) {
@@ -34,7 +34,7 @@ int main()
     kvstore = new FileSystemStore(fs);
 
     printf("kv_init()\n");
-    if((res = kvstore->init())!=0) printf("kv_init error: %d (init)\n ", err_code(res));
+    if((res = kvstore->init())!=0) printf("kv_init error: %d\n ", err_code(res));
 
     printf("kv_get_info of a key\n");
     if((res = kvstore->get_info(key, &info))!=0) printf("kv_get_info error: %d\n", err_code(res));
@@ -49,12 +49,19 @@ int main()
         char str[10];
         scanf("%10s",str); 
         printf("kv_set() - %s\n", str);
-        if ((res = kvstore->set(key, str, strlen(str), 0))!= 0) printf("kv_set() error: %d (set)\n ", err_code(res));
+        if ((res = kvstore->set(key, str, strlen(str), 0))!= 0) printf("kv_set() error: %d\n ", err_code(res));
     }
 
     printf("kv_get()\n");
     if ((res = kvstore->get(key, buffer, buffer_size, &actual_size, 0))!= 0) printf("kv_get() error: %d\n", err_code(res));
     else printf("kv_get() - data: %s\n",  buffer);
+
+    printf("kv_deinit()\n");
+    if((res = kvstore->init())!=0) printf("kv_deinit error: %d\n ", err_code(res));
+
+    printf("fs_unmounting...\n");    
+    if((res = fs->unmount())!= 0) printf("fs_unmount() error: %d\n", err_code(res));
+    else printf("Unounted\n");
     
     printf("Example end!\r\n");
 }

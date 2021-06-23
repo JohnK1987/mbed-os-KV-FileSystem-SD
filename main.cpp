@@ -43,21 +43,18 @@ int main()
     // Press and hold user button and press reset with it, that will call reset and change of value
     if(DigitalIn(USER_BUTTON).read())
     {
-        printf("KVStore::reset()\n");
-        kvstore->reset();
+        printf("kv_reset()\n");
+        if ((res = kvstore->reset())!= 0) printf("kv_reset() error: %d\n", err_code(res));
         printf("Please enter a short string!\n");
         char str[10];
         scanf("%10s",str); 
-        printf("KVStore::set() - %s\n", str);
-        if ((res = kvstore->set(key, str, strlen(str), 0))!= 0)
-        {
-            printf("KVStore::set() error: %d (set)\n ", err_code(res));
-        }  
+        printf("kv_set() - %s\n", str);
+        if ((res = kvstore->set(key, str, strlen(str), 0))!= 0) printf("kv_set() error: %d (set)\n ", err_code(res));
     }
 
-    printf("KVStore::get()\n");
-    if ((res = kvstore->get(key, buffer, buffer_size, &actual_size, 0))!= 0) printf("KVStore::get() error: %d\n", err_code(res));
-    else printf("KVStore::get() - data: %s\n",  buffer);
+    printf("kv_get()\n");
+    if ((res = kvstore->get(key, buffer, buffer_size, &actual_size, 0))!= 0) printf("kv_get() error: %d\n", err_code(res));
+    else printf("kv_get() - data: %s\n",  buffer);
     
     printf("Example end!\r\n");
 }
